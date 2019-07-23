@@ -65,15 +65,15 @@ public class DBManager extends SQLiteOpenHelper {
     void insertLocation(Bundle location) {
 
         // recuperiamo il db
-        SQLiteDatabase db = getWritableDatabase();
+        try(SQLiteDatabase db = getWritableDatabase()) {
+            String query = "INSERT INTO luoghi (descrizione , indirizzo, immagine) VALUES (' "
+                    + location.get("descrizione") + "' "
+                    + ", '" + location.getString("indirizzo") + "' "
+                    + ", " + location.getString("immagine")
+                    + ")";
 
-        String query = "INSERT INTO luoghi (descrizione , indirizzo, immagine) VALUES (' "
-                + location.get("descrizione")+ "' "
-                + ", '" + location.getString("indirizzo") + "' "
-                + ", " + location.getString("immagine")
-                + ")";
-
-        db.execSQL(query);
+            db.execSQL(query);
+        }
     }
 }
 
