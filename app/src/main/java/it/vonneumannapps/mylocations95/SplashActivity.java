@@ -1,4 +1,4 @@
-package it.vonneumannapps.mylocations;
+package it.vonneumannapps.mylocations95;
 
 import androidx.appcompat.app.AppCompatActivity;
 

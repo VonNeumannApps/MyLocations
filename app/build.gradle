@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
-        applicationId "it.vonneumannapps.mylocations"
+        applicationId "it.vonneumannapps.mylocations95"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1

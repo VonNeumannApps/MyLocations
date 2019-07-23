@@ -1,4 +1,4 @@
-package it.vonneumannapps.mylocations;
+package it.vonneumannapps.mylocations95;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("it.vonneumannapps.mylocations", appContext.getPackageName());
+        assertEquals("it.vonneumannapps.mylocations95", appContext.getPackageName());
     }
 }
