@@ -100,6 +100,13 @@ public class MainActivity extends AppCompatActivity {
         ListView locationsLV = findViewById(R.id.locationsListView);
         locationsLV.setAdapter(baseAdapter);
 
+        ImageView addBtn = findViewById(R.id.addButton);
 
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO
+            }
+        });
     }
 }
