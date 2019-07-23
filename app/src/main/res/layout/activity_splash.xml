@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bus_yellow_submarine"
+        android:src="@drawable/miniature_yellow_van_thailand_august_15_2017"
 
         />
 
