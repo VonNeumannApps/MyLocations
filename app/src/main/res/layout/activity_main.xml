@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorWhite"
             android:text="@string/app_name"
             />
 
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:src="@drawable/baseline_add_black_36"
-            android:tint="#FFFFFF"
+            android:tint="@color/colorWhite"
             />
 
     </FrameLayout>
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:src="@drawable/baseline_select_all_black_36"
-            android:tint="#FFFFFF"
+            android:tint="@color/colorWhite"
             />
 
         <ImageView
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:src="@drawable/baseline_delete_black_36"
-            android:tint="#FFFFFF"
+            android:tint="@color/colorWhite"
             />
     </FrameLayout>
 
