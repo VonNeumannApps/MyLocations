@@ -31,8 +31,59 @@
             android:tint="#FFFFFF"
             />
 
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D4F2DB"
+        android:padding="18dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/LOCAZTIONS_LIST_TEXT"
+            />
 
 
+
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/locationsListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+    </ListView>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorDarkGreen"
+        android:padding="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/selectAllButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:src="@drawable/baseline_select_all_black_36"
+            android:tint="#FFFFFF"
+            />
+
+        <ImageView
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:src="@drawable/baseline_delete_black_36"
+            android:tint="#FFFFFF"
+            />
     </FrameLayout>
 
 </LinearLayout>

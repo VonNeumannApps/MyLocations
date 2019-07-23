@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyLocations</string>
+    <string name="LOCAZTIONS_LIST_TEXT">LOCAZTIONS_LIST_TEXT</string>
 </resources>
