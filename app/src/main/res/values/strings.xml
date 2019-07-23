@@ -2,4 +2,7 @@
     <string name="app_name">MyLocations95</string>
     <string name="LOCAZTIONS_LIST_TEXT">            android:text="@string/LOCATIONS_LIST_TEXT"/>
 </string>
+    <string name="NEW_LOCATION_TEXT">Nuovo luogo</string>
+    <string name="LOCATION_DESCRIPTION_TEXT">Descrizione luogo</string>
+    <string name="LOCATION_ADDRESS_TEXT">Indirizzo luogo</string>
 </resources>
