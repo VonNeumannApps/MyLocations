@@ -1,5 +1,6 @@
 package it.vonneumannapps.mylocations95;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -85,6 +86,37 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    void openLocationDetailActivity(Bundle location){
+
+        Intent intent = new Intent(this, LocationDetailActivity.class);
+
+        intent.putExtras(location);
+
+        startActivityForResult(intent, Utils.ADD_OR_EDIT_CODE);
+
+        //startIntent(intent);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        switch (requestCode) {
+
+            case Utils.ADD_OR_EDIT_CODE : {
+                if (requestCode == RESULT_OK) {
+                    loadLocations();
+                }
+                break;
+            }
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
+
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +137,8 @@ public class MainActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
+
+                openLocationDetailActivity(new Bundle());
             }
         });
     }
