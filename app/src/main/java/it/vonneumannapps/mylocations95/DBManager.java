@@ -72,6 +72,8 @@ public class DBManager extends SQLiteOpenHelper {
                 + ", '" + location.getString("indirizzo") + "' "
                 + ", " + location.getString("immagine")
                 + ")";
+
+        db.execSQL(query);
     }
 }
 
