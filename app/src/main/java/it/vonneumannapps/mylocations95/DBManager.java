@@ -62,6 +62,16 @@ public class DBManager extends SQLiteOpenHelper {
         return locations;
     }
 
+    void insertLocation(Bundle location) {
 
+        // recuperiamo il db
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "INSERT INTO luoghi (descrizione , indirizzo, immagine) VALUES (' "
+                + location.get("descrizione")+ "' "
+                + ", '" + location.getString("indirizzo") + "' "
+                + ", " + location.getString("immagine")
+                + ")";
+    }
 }
 
