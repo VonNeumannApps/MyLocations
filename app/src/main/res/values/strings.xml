@@ -8,4 +8,7 @@
     <string name="CAMERA_ACTION_TEXT">Fotocamera</string>
     <string name="GALLERY_ACTION_TEXT">Galleria</string>
     <string name="ACTION_SELECTION_TEXT">Seleziona azione</string>
+
+    <string name="REQUIRED_FIELDS_ERROR_MESSAGE">Inserisci tutti i campi</string>
+    <string name="SUCCESSFULLY_SAVED_MESSAGE">Salvataggio effettuato</string>
 </resources>

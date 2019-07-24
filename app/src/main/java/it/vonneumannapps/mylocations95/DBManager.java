@@ -1,6 +1,7 @@
 package it.vonneumannapps.mylocations95;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -66,6 +67,7 @@ public class DBManager extends SQLiteOpenHelper {
 
         // recuperiamo il db
         try(SQLiteDatabase db = getWritableDatabase()) {
+            /*
             String query = "INSERT INTO luoghi (descrizione , indirizzo, immagine) VALUES (' "
                     + location.get("descrizione") + "' "
                     + ", '" + location.getString("indirizzo") + "' "
@@ -73,6 +75,16 @@ public class DBManager extends SQLiteOpenHelper {
                     + ")";
 
             db.execSQL(query);
+            */
+
+            ContentValues cv = new ContentValues();
+
+            cv.put("descrizione", location.getString("descrizione"));
+            cv.put("indirizzo", location.getString("indirizzo"));
+            cv.put("immagine", location.getByteArray("immagine"));
+
+            //db.execSQL(query);
+            db.insert("luoghi", null, cv);
         }
     }
 }

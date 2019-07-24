@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 
 import android.os.Bundle;
@@ -25,8 +26,11 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 public class LocationDetailActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -119,6 +123,47 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
         }*/
     }
 
+    void saveLocation() {
+
+        // salviamo in bundle e passiamo al dbmanager
+
+        if(descET.getText().toString().equals("") || addressET.getText().toString().equals("")) {
+            // error msg
+            Toast.makeText(this, getString(R.string.REQUIRED_FIELDS_ERROR_MESSAGE), Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+
+            // save location
+            // compress image 100% for DB limit image size 2MB
+            // DBManagher.insertLocation(Bundle location)
+            //get image?
+
+
+        boolean isEditMode = !location.isEmpty();
+
+        location.putString("descrizione", descET.getText().toString());
+        location.putString("indirizzo", addressET.getText().toString());
+
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) imageIV.getDrawable();
+
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+
+        location.putByteArray("immagine", Utils.convertBitmapToByteArray(bitmap));
+
+        if (!isEditMode) {
+
+            dbManager.insertLocation(location);
+        }
+
+        Toast.makeText(this, getString(R.string.SUCCESSFULLY_SAVED_MESSAGE), Toast.LENGTH_SHORT).show();
+
+        setResult(RESULT_OK);
+
+        finish();
+    }
+
     void openActionSelectionDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -179,10 +224,42 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
                 if(resultCode == RESULT_OK) {
 
                     String pathName = Utils.getMainDirectory(this).getPath() + Utils.TMP_FILENAME;
+                    Bitmap bitmap;
+
+                    // TODO Autoclose anche per i file?
                     File tempFile = new File(pathName);
-                    Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getPath());
+                    bitmap = BitmapFactory.decodeFile(tempFile.getPath());
 
                     imageIV.setImageBitmap(bitmap);
+
+                    // TODO saveLocation()
+
+                    // int jpegQuality = 5;
+                    /*
+                    //File tempFile2 = new File(pathName + "");
+                    try(OutputStream fOut = new FileOutputStream(tempFile)) {
+
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, jpegQuality, fOut);
+                    }*/
+
+                    /*
+                    final FileOutputStream ostream;
+
+                    try {
+
+                        Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getPath());
+
+                        ostream = new FileOutputStream(tempFile);
+
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 95, ostream);
+
+                        imageIV.setImageBitmap(bitmap);
+
+                    } catch (FileNotFoundException e) {
+
+                        e.printStackTrace();
+                    }
+                    */
                 }
 
                 break;
@@ -221,7 +298,8 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+
+                saveLocation();
             }
         });
 

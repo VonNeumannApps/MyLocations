@@ -8,6 +8,7 @@ import android.os.Build;// used for os version checks
 
 import androidx.core.content.FileProvider;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class Utils {
@@ -24,6 +25,20 @@ public class Utils {
 
         return bmp;
 
+                /*image.setImageBitmap(Bitmap.createScaledBitmap(bmp, image.getWidth(),
+                image.getHeight(), false));*/
+
+    }
+
+    public static byte[] convertBitmapToByteArray(Bitmap bitmap) {
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 0, stream);
+
+        byte[] bytes = stream.toByteArray();
+
+        return bytes;
     }
 
     public static File getMainDirectory(Context context) {
