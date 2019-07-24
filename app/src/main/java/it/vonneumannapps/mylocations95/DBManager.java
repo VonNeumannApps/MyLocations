@@ -21,7 +21,7 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String query = "CREATE TABLE luoghi (id PRIMARY KEY AUTOINCREMENT, descrizione TEXT, indirizzo TEXT, immagine BLOB)";
+        String query = "CREATE TABLE luoghi (id INTEGER PRIMARY KEY AUTOINCREMENT, descrizione TEXT, indirizzo TEXT, immagine BLOB)";
 
         sqLiteDatabase.execSQL(query);
     }
