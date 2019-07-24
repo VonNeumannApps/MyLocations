@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -131,6 +132,15 @@ public class MainActivity extends AppCompatActivity {
 
         ListView locationsLV = findViewById(R.id.locationsListView);
         locationsLV.setAdapter(baseAdapter);
+
+        locationsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Bundle location = locations.get(i);
+                openLocationDetailActivity(location);
+            }
+        });
 
         ImageView addBtn = findViewById(R.id.addButton);
 

@@ -96,6 +96,16 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
         }
     }
 
+    void loadData() {
+
+        descET.setText(location.getString("descrizione"));
+        addressET.setText(location.getString("indirizzo"));
+
+        Bitmap bitmap = Utils.convertByteArrayToBitmap(location.getByteArray("immagine"));
+
+        imageIV.setImageBitmap(bitmap);
+    }
+
     void takePicture() {
 
         // SCATTA FOTO
@@ -292,6 +302,7 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
         if(!location.isEmpty()) {
 
             // caricare i dati
+            loadData();
         }
 
         ImageView saveBtn = findViewById(R.id.saveButton);
