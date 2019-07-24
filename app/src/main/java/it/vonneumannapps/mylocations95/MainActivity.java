@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
 
             case Utils.ADD_OR_EDIT_CODE : {
-                if (requestCode == RESULT_OK) {
+                if (resultCode == RESULT_OK) {
                     loadLocations();
                 }
                 break;
