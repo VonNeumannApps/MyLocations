@@ -3,6 +3,10 @@
     package="it.vonneumannapps.mylocations95"
     android:installLocation="preferExternal">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +14,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
+        <!-- da una nuova versione android (forse 25), per accesso ai file, ci vuole questa dichiarazione di provider  -->
+        <!-- NB per le nuove versioni il nome è androidx.core.content.FileProvider, prima era ..-->
+        <!-- authorities è chi è l'autorità che ti da il permesso, in questo caso l'applicazione-->
+        <!-- exported è ..?-->
+        <!-- grantUriPermissions truegli da il permesso-->
+        <!-- resource gli da il path-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="$(applicationId).provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"
+                />
+            <!-- @xml/provider_paths indica il file xml che abbiamo creato in res/xml-->
+        </provider>
+
         <activity android:name=".LocationDetailActivity"></activity>
         <activity android:name=".SplashActivity"></activity>
         <activity android:name=".MainActivity">
