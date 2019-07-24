@@ -166,6 +166,9 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
 
             dbManager.insertLocation(location);
         }
+        else{
+            dbManager.updateLocation(location);
+        }
 
         Toast.makeText(this, getString(R.string.SUCCESSFULLY_SAVED_MESSAGE), Toast.LENGTH_SHORT).show();
 

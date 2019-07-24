@@ -63,6 +63,21 @@ public class DBManager extends SQLiteOpenHelper {
         return locations;
     }
 
+    void updateLocation(Bundle location) {
+
+        try(SQLiteDatabase db = getWritableDatabase()) {
+
+            ContentValues cv = new ContentValues();
+
+            cv.put("id", location.getInt("id"));
+            cv.put("descrizione", location.getString("descrizione"));
+            cv.put("indirizzo", location.getString("indirizzo"));
+            cv.put("immagine", location.getByteArray("immagine"));
+
+            db.update("luoghi", cv, "id=?", new String[]{String.valueOf(location.getInt("id"))});
+        }
+    }
+
     void insertLocation(Bundle location) {
 
         // recuperiamo il db
