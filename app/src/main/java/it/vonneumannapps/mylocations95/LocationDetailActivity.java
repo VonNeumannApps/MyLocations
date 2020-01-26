@@ -32,7 +32,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-public class LocationDetailActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class LocationDetailActivity extends AppCompatActivity
+        implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     EditText descET;
     EditText addressET;
@@ -44,7 +45,6 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
     Bundle location;
 
     String[] actions;
-
     BaseAdapter actionsAdapter;
 
     void initializeActionsAdapter() {
@@ -144,12 +144,10 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
             return;
         }
 
-
-            // save location
-            // compress image 100% for DB limit image size 2MB
-            // DBManagher.insertLocation(Bundle location)
-            //get image?
-
+        // save location
+        // compress image 100% for DB limit image size 2MB
+        // DBManagher.insertLocation(Bundle location)
+        //get image?
 
         boolean isEditMode = !location.isEmpty();
 
@@ -280,8 +278,6 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
-
-
     }
 
     @Override
@@ -293,7 +289,8 @@ public class LocationDetailActivity extends AppCompatActivity implements Activit
 
         initializeActionsAdapter();
 
-                dbManager = new DBManager(this, DBManager.DATABASE_NAME, null, DBManager.DATABASE_VERSION);
+        dbManager = new DBManager(this, DBManager.DATABASE_NAME,
+                null, DBManager.DATABASE_VERSION);
 
         descET = findViewById(R.id.descriptionEditText);
         addressET = findViewById(R.id.addressEditText);
