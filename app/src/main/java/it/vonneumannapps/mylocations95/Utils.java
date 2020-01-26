@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;// used for os version checks
+import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
@@ -66,5 +67,11 @@ public class Utils {
         }
 
         return outputFileUri;
+    }
+
+    public static void showShortToast(Context context, int textStringId) {
+
+        String stringToShow = context.getString(textStringId);
+        Toast.makeText(context, stringToShow, Toast.LENGTH_SHORT).show();
     }
 }

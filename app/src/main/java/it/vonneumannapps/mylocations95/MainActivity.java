@@ -1,8 +1,10 @@
 package it.vonneumannapps.mylocations95;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -163,6 +165,15 @@ public class MainActivity extends AppCompatActivity {
                 selectAllAccounts();
             }
         });
+
+        ImageView deleteBtn = findViewById(R.id.deleteButton);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openDeletionConfirmationDialog();
+            }
+        });
     }
 
     void selectAllAccounts() {
@@ -175,4 +186,53 @@ public class MainActivity extends AppCompatActivity {
         baseAdapter.notifyDataSetChanged();
     }
 
+    void openDeletionConfirmationDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(R.string.app_name);
+        builder.setMessage(R.string.DELETE_CONFIRMATION_MESSAGE);
+
+        builder.setCancelable(false);// utente deve scegliere o si o no
+        builder.setPositiveButton(getString(R.string.YES), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                deleteLocations(); // procedi con cancellazione
+                // TODO notificare dataset changed
+            }
+        });
+
+        // la dialog viene chiusa automaticamente passando listener null
+        builder.setNegativeButton(getString(R.string.NO), null);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    void deleteLocations() {
+
+        dbManager.deleteSelectedLocations(getLocationsToBeDeleted());
+
+        Utils.showShortToast(this, R.string.DELETE_SUCCESS_MESSAGE);
+
+        //non facciamo "notify changed" perché in questo caso è cambiato il numero degli account
+        // e dobbiamo ricaricarli tutti dal db
+        loadLocations();
+    }
+
+    ArrayList<Bundle> getLocationsToBeDeleted() {
+
+        ArrayList<Bundle> locationsToBeDeleted = new ArrayList<>();
+
+        // questo for sarebbe superfluo perché ho già messo il controllo nel metodo del db manager
+        for(Bundle location : locations) {
+            if(location.getBoolean(DBManager.SELECTED_FIELD_NAME)) {
+
+                locationsToBeDeleted.add(location);
+            }
+        }
+
+        return locationsToBeDeleted;
+    }
 }

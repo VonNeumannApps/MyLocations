@@ -11,4 +11,9 @@
 
     <string name="REQUIRED_FIELDS_ERROR_MESSAGE">Inserisci tutti i campi</string>
     <string name="SUCCESSFULLY_SAVED_MESSAGE">Salvataggio effettuato</string>
+
+    <string name="DELETE_CONFIRMATION_MESSAGE">Sei sicuro di voler eliminare gli elementi selezionati?</string>
+    <string name="YES">Si</string>
+    <string name="NO">No</string>
+    <string name="DELETE_SUCCESS_MESSAGE">Accounts eliminati con successo!</string>
 </resources>

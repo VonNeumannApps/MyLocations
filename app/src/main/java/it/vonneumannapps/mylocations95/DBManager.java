@@ -16,6 +16,7 @@ public class DBManager extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     public static final String SELECTED_FIELD_NAME = "selected";
+    public static final String LOCATIONS_TABLE_NAME = "luoghi";
 
     public DBManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -24,7 +25,8 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String query = "CREATE TABLE luoghi (id INTEGER PRIMARY KEY AUTOINCREMENT, descrizione TEXT, indirizzo TEXT, immagine BLOB)";
+        String query = "CREATE TABLE " + LOCATIONS_TABLE_NAME
+                + " (id INTEGER PRIMARY KEY AUTOINCREMENT, descrizione TEXT, indirizzo TEXT, immagine BLOB)";
 
         sqLiteDatabase.execSQL(query);
     }
@@ -40,7 +42,7 @@ public class DBManager extends SQLiteOpenHelper {
 
         ArrayList<Bundle> locations = new ArrayList<>();
 
-        String query = "SELECT * FROM luoghi";
+        String query = "SELECT * FROM " + LOCATIONS_TABLE_NAME;
 
         Cursor cursor = db.rawQuery(query, null);
 
@@ -76,7 +78,7 @@ public class DBManager extends SQLiteOpenHelper {
             cv.put("indirizzo", location.getString("indirizzo"));
             cv.put("immagine", location.getByteArray("immagine"));
 
-            db.update("luoghi", cv, "id=?", new String[]{String.valueOf(location.getInt("id"))});
+            db.update(LOCATIONS_TABLE_NAME, cv, "id=?", new String[]{String.valueOf(location.getInt("id"))});
         }
     }
 
@@ -85,7 +87,8 @@ public class DBManager extends SQLiteOpenHelper {
         // recuperiamo il db
         try(SQLiteDatabase db = getWritableDatabase()) {
             /*
-            String query = "INSERT INTO luoghi (descrizione , indirizzo, immagine) VALUES (' "
+            String query = "INSERT INTO " + LOCATIONS_TABLE_NAME
+            + " (descrizione , indirizzo, immagine) VALUES (' "
                     + location.get("descrizione") + "' "
                     + ", '" + location.getString("indirizzo") + "' "
                     + ", " + location.getString("immagine")
@@ -101,8 +104,49 @@ public class DBManager extends SQLiteOpenHelper {
             cv.put("immagine", location.getByteArray("immagine"));
 
             //db.execSQL(query);
-            db.insert("luoghi", null, cv);
+            db.insert(LOCATIONS_TABLE_NAME, null, cv);
         }
+    }
+
+    public void deleteSelectedLocations(ArrayList<Bundle> locations) {
+
+        String query = getDeletionQuerySelectedLocations(locations);
+
+        try(SQLiteDatabase db = getWritableDatabase()) {
+
+            db.execSQL(query);
+        }
+
+        // TODO we need unit tests
+    }
+
+    public static String getDeletionQuerySelectedLocations(ArrayList<Bundle> locations) {
+
+        String query = "DELETE FROM " + LOCATIONS_TABLE_NAME
+                + "  WHERE id IN (";
+
+        boolean isFirstIdToDelete = true;
+
+        for(Bundle location : locations) {
+
+            if(location.getBoolean(SELECTED_FIELD_NAME))
+            {
+                int idToAdd = location.getInt("id");
+
+                if(isFirstIdToDelete) {
+
+                    query = query + idToAdd;
+                    isFirstIdToDelete = false; // abbiamo appena aggiunto il primo
+                }
+                else {
+                    query = query + ", " + idToAdd;
+                }
+            }
+        }
+
+        query = query + ")";
+
+        return query;
     }
 }
 
