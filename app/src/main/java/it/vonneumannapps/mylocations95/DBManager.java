@@ -15,6 +15,8 @@ public class DBManager extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "db";
     public static final int DATABASE_VERSION = 1;
 
+    public static final String SELECTED_FIELD_NAME = "selected";
+
     public DBManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }

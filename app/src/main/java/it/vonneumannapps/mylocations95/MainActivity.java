@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     DBManager dbManager;
     ArrayList<Bundle> locations = new ArrayList<>();
     BaseAdapter baseAdapter;
+    ImageView selectAllBtn;
 
     // questa immagine descrive i luoghi visitati, con indirizzo e immagine
 
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                     LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 
                     view = layoutInflater.inflate(R.layout.location_item_layout, viewGroup, false);
-
                 }
 
                 Bundle location = getItem(i);
@@ -57,12 +57,17 @@ public class MainActivity extends AppCompatActivity {
                 // NB findViewById lo chiamato sulla view, non sulla current activity
                 TextView descTV = view.findViewById(R.id.descriptionTextView);
                 TextView addressTV =view.findViewById(R.id.addressTextView);
-
                 descTV.setText(location.getString("descrizione"));
                 addressTV.setText(location.getString("indirizzo"));
 
-                ImageView locationImageIV = view.findViewById(R.id.locationImageImageView);
+                ImageView checkIV = view.findViewById(R.id.checkImageView);
+                if(location.getBoolean(DBManager.SELECTED_FIELD_NAME)) {
+                    checkIV.setVisibility(View.VISIBLE);
+                } else {
+                    checkIV.setVisibility(View.GONE);
+                }
 
+                ImageView locationImageIV = view.findViewById(R.id.locationImageImageView);
                 locationImageIV.setImageBitmap(Utils.convertByteArrayToBitmap(location.getByteArray("immagine")));
 
                 return view;
@@ -114,8 +119,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
-
-
     }
 
     @Override
@@ -151,5 +154,25 @@ public class MainActivity extends AppCompatActivity {
                 openLocationDetailActivity(new Bundle());
             }
         });
+
+        selectAllBtn = findViewById(R.id.selectAllButton);
+        selectAllBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { //todo spiegare questo
+
+                selectAllAccounts();
+            }
+        });
     }
+
+    void selectAllAccounts() {
+
+        for (Bundle location : locations) {
+
+            location.putBoolean(DBManager.SELECTED_FIELD_NAME, true);
+        }
+
+        baseAdapter.notifyDataSetChanged();
+    }
+
 }
