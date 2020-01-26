@@ -29,8 +29,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 public class LocationDetailActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
@@ -38,7 +36,7 @@ public class LocationDetailActivity extends AppCompatActivity
     EditText descET;
     EditText addressET;
 
-    ImageView imageIV;
+    ImageView locationPictureIV;
 
     DBManager dbManager;
 
@@ -103,7 +101,7 @@ public class LocationDetailActivity extends AppCompatActivity
 
         Bitmap bitmap = Utils.convertByteArrayToBitmap(location.getByteArray("immagine"));
 
-        imageIV.setImageBitmap(bitmap);
+        locationPictureIV.setImageBitmap(bitmap);
     }
 
     void takePicture() {
@@ -154,7 +152,7 @@ public class LocationDetailActivity extends AppCompatActivity
         location.putString("descrizione", descET.getText().toString());
         location.putString("indirizzo", addressET.getText().toString());
 
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) imageIV.getDrawable();
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) locationPictureIV.getDrawable();
 
         Bitmap bitmap = bitmapDrawable.getBitmap();
 
@@ -241,7 +239,7 @@ public class LocationDetailActivity extends AppCompatActivity
                     File tempFile = new File(pathName);
                     bitmap = BitmapFactory.decodeFile(tempFile.getPath());
 
-                    imageIV.setImageBitmap(bitmap);
+                    locationPictureIV.setImageBitmap(bitmap);
 
                     // TODO saveLocation()
 
@@ -264,7 +262,7 @@ public class LocationDetailActivity extends AppCompatActivity
 
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 95, ostream);
 
-                        imageIV.setImageBitmap(bitmap);
+                        locationPictureIV.setImageBitmap(bitmap);
 
                     } catch (FileNotFoundException e) {
 
@@ -295,7 +293,7 @@ public class LocationDetailActivity extends AppCompatActivity
         descET = findViewById(R.id.descriptionEditText);
         addressET = findViewById(R.id.addressEditText);
 
-        imageIV = findViewById(R.id.locationImageImageView);
+        locationPictureIV = findViewById(R.id.locationImageImageView);
 
         location = getIntent().getExtras();
 
